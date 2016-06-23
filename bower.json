@@ -1,0 +1,28 @@
+{
+  "name": "slackot",
+  "description": "slack using socket.io",
+  "main": "index.js",
+  "authors": [
+    "kshirish <kisleyshirish25@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "slack",
+    "socket.io",
+    "websockets"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0"
+  }
+}

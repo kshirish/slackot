@@ -1,0 +1,21 @@
+{
+    "defaultRoom": "general",
+    "rooms": ["General", "angular", "socket.io", "express", "node", "mongo", "PHP", "laravel"],
+    "sampleNotifications": [{
+        "content": "Hi",
+        "username": "Chris",
+        "room": "php"
+    }, {
+        "content": "Hello",
+        "username": "Obinna",
+        "room": "laravel"
+    }, {
+        "content": "Ait",
+        "username": "Bill",
+        "room": "angular"
+    }, {
+        "content": "Amazing room",
+        "username": "Patience",
+        "room": "socket.io"
+    }]
+}

@@ -1,0 +1,24 @@
+<div class="page-header">
+    <h2>{{room}}</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12" ng-repeat="user in users">
+        <button type="button" class="btn btn-default" disabled="disabled">{{user}}</button>
+    </div>                
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-12 margin-top-25" id="messages-container">                        
+        <div ng-repeat="notification in notifications">
+            <strong>[{{notification.created | date : 'shortTime'}}] </strong>
+            <strong>&lt; {{notification.username}} &gt; </strong>
+            <p class="well well-sm">{{notification.content}}</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <textarea class="form-control" rows="4" placeholder="Type message here .." ng-model="content"></textarea>    
+        <button type="button" class="btn btn-default" ng-click="sendNotification(content)">Send</button>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-12 margin-top-25">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="createRoom()">Create a room</button>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Rooms joined</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group" ng-repeat="room in joinedRooms">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{room}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-click="leaveRoom(room)"><a href="#">Leave room</a></li>
+                <li><a ng-href="/notifications/{{room}}">Goto room</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Yet to join!</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group" ng-repeat="room in otherRooms">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{room}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-click="joinRoom(room)"><a href="#">Join room</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
