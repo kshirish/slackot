@@ -12,10 +12,10 @@ const roomSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	}],
-	notifications: {
+	notifications: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Notification'
-	}
+	}]
 });
 
 module.exports = mongoose.model('Room', roomSchema);

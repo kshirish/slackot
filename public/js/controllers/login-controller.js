@@ -1,7 +1,7 @@
 (function($, angular) {
 
 	angular.module('LoginCtrl', [])
-		.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+		.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', '$sessionStorage', function($scope, $rootScope, $http, $location, $sessionStorage) {
 
 			$rootScope.loginPage = true;
 
@@ -20,7 +20,7 @@
 						
 						if(data.success) {
 
-							sessionStorage.setItem('loggedIn', true);
+							$sessionStorage.username = info.username;
 							$location.url('/home');
 						}
 					})

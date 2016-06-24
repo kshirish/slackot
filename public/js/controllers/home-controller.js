@@ -15,16 +15,44 @@
 					// handle error
 				});
 
-			$scope.createRoom = function() {
+			$scope.createRoom = function(name) {
 
+				$http.post('/api/v1/create/room', {name: name})
+					.success(function(data) {
+						$scope.otherRooms = $scope.otherRooms.concat(data);
+					})
+					.error(function() {					
+						// handle error
+					});
 			};
 
-			$scope.joinRoom = function() {
+			$scope.joinRoom = function(room) {
 
+				$http.put('/api/v1/join/' + room._id)
+					.success(function(data) {
+						$scope.joinedRooms = $scope.joinedRooms.concat(room);
+						$scope.otherRooms = $scope.otherRooms.filter(function(other) {
+							return other._id !== room._id;
+						});
+					})
+					.error(function() {					
+						// handle error
+					});				
 			};
 
-			$scope.leaveRoom = function() {
+			$scope.leaveRoom = function(room) {
 
+				$http.put('/api/v1/leave/' + room._id)
+					.success(function(data) {
+						
+						$scope.otherRooms = $scope.otherRooms.concat(room);
+						$scope.joinedRooms = $scope.joinedRooms.filter(function(room) {
+							return data._id !== room._id;
+						});
+					})
+					.error(function() {					
+						// handle error
+					});
 			};
 
 		}]);

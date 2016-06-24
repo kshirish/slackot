@@ -12,7 +12,7 @@
 					templateUrl: '/views/home.html',
 					controller: 'HomeController'
 				})
-				.when('/notifications/:room', {
+				.when('/notifications/:roomId', {
 					templateUrl: '/views/room.html',
 					controller: 'RoomController'
 				})

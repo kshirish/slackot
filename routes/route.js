@@ -74,26 +74,28 @@ module.exports = router => {
 	router.put('/join/:roomId', (req, res) => {
 
 		const _id = req.params.roomId;
+		const userId = req.session.userId;
 
 		Room.findById({_id})
 			.then(room => {
-				return Room.update({_id}, {$push: {users: {$each: req.session.userId}}});
+				return Room.update({_id}, {$push: {users: userId}});
 			})
-			.then(() => res.json({success: 'Joined successfully'}))
-			.catch(() => res.json({error: 'Error in getting notifications for this room'}));
+			.then((room) => res.json(room))
+			.catch(() => res.json({error: 'Error in joining this room'}));
 	});
-		
+
 	// leaves a room
 	router.put('/leave/:roomId', (req, res) => {
 
 		const _id = req.params.roomId;
+		const userId = req.session.userId;
 
 		Room.findById({_id})
 			.then(room => {
-				return Room.update({_id}, {$pull: {users: req.session.userId}});
+				return Room.update({_id}, {$pull: {users: userId}});
 			})
-			.then(() => res.json({success: 'Left successfully'}))
-			.catch(() => res.json({error: 'Error in getting notifications for this room'}));
+			.then((room) => res.json(room))
+			.catch(() => res.json({error: 'Error in leaving this room'}));
 	});
 
 	// sends a notification in room
@@ -111,7 +113,7 @@ module.exports = router => {
 
 				return notification.save();
 			})
-			.then((notification) => Room.update({_id}, {$push: {notifications: {$each: notification._id}}}))
+			.then((notification) => return Room.update({_id}, {$push: {notifications: notification._id}}))
 			.then(() => res.json({success: 'Notification sent successfully'}))
 			.catch(() => res.json({error: 'Error in getting notifications for this room'}));
 	});
@@ -125,7 +127,7 @@ module.exports = router => {
 
 				return Notification.find({_id: { $in: room.notifications } });
 			})
-			.then(notifications => res.json({success: notifications}))
+			.then(notifications => res.json({notifications}))
 			.catch(() => res.json({error: 'Error in getting notifications for this room'}));
 	});
 
@@ -138,7 +140,7 @@ module.exports = router => {
 
 				return User.find({_id: { $in: room.users } });
 			})
-			.then(users => res.json({success: users}))
+			.then(users => res.json({users}))
 			.catch(() => res.json({error: 'Error in getting users for this room'}));
 	});
 
@@ -152,7 +154,7 @@ module.exports = router => {
 		});
 
 		room.save()
-			.then(() => res.json({success: 'Room created successfully'}))
+			.then((room) => res.json(room))
 			.catch(() => res.json({error: 'Error in  creating room'}));
 	});
 
