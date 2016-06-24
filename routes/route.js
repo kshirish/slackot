@@ -19,17 +19,17 @@ module.exports = router => {
     });
 
 	// login
-	router.get('/login', (req, res) => {
-		
+	router.post('/login', (req, res) => {
+
 		const {username, password} = req.body;
 		const update = {$set: {isOnline: true}};
 		const options = {new: true};
 
 		User.findOneAndUpdate({username, password}, update, options)
-			.then(() => {
+			.then((user) => {
 
-				req.session.username = username;
-				req.session.userId = userId;
+				req.session.username = user.username;
+				req.session.userId = user._id;
 				res.json({success: 'Logged in successfully!'});
 			})
 			.catch(() => res.json({error: 'Error in logging'}));

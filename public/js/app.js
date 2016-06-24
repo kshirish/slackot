@@ -1,1 +1,1 @@
-angular.module('slackot', ['ngRoute', 'ngResource']);
+angular.module('slackot', ['ngRoute', 'HomeCtrl', 'LoginCtrl', 'RoomCtrl', 'appRoutes']);

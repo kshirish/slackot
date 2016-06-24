@@ -1,6 +1,14 @@
 <div class="row">
     <div class="col-sm-12 margin-top-25">
-        <button type="button" class="btn btn-primary btn-lg" ng-click="createRoom()">Create a room</button>
+        <form class="form-inline" ng-submit="createRoom(roomname)">
+            <div class="form-group">
+                <label class="sr-only" for="createRoom">Room name</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="createRoom" placeholder="Name" ng-model="roomname">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create room</button>
+        </form>
     </div>
 </div>
 <div class="page-header">
@@ -17,6 +25,7 @@
                 <li><a ng-href="/notifications/{{room}}">Goto room</a></li>
             </ul>
         </div>
+        <div ng-hide="joinedRooms.length" class="alert alert-warning" role="alert">You haven't join any room yet, that's sad!</div>
     </div>
 </div>
 <div class="page-header">
@@ -32,5 +41,6 @@
                 <li ng-click="joinRoom(room)"><a href="#">Join room</a></li>
             </ul>
         </div>
+        <div ng-hide="otherRooms.length" class="alert alert-info" role="alert">Do you realize that you can join more rooms?</div>
     </div>
 </div>

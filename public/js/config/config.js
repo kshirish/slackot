@@ -1,24 +1,26 @@
 (function($, angular) {
 
-	angular.module('slackot')
-		.config(['$routeProvider', function ($routeProvider) {
+	angular.module('appRoutes', [])
+		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			
 			$routeProvider
-				.when('/login', {
-					templateUrl: 'login.html',
+				.when('/', {
+					templateUrl: '/views/login.html',
 					controller: 'LoginController'
 				})
-				.when('/', {
-					templateUrl: 'home.html',
+				.when('/home', {
+					templateUrl: '/views/home.html',
 					controller: 'HomeController'
 				})
-				.when('/:room', {
-					templateUrl: 'room.html',
+				.when('/notifications/:room', {
+					templateUrl: '/views/room.html',
 					controller: 'RoomController'
 				})
 			    .otherwise({
-			        redirectTo: '/login'
+			        redirectTo: '/'
 			    });
+
+			$locationProvider.html5Mode(true);
 		}]);
 		
-})(jquery, angular);		 
+})(jQuery, angular);		 

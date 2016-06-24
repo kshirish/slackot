@@ -1,6 +1,6 @@
 (function($, angular) {
 
-	angular.module('slackot')
+	angular.module('RoomCtrl', [])
 		.controller('RoomController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 
 			// room
@@ -60,4 +60,4 @@
 
 		}]);
 
-})(jquery, angular)
+})(jQuery, angular)

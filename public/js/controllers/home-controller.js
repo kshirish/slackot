@@ -1,6 +1,6 @@
 (function($, angular) {
 
-	angular.module('slackot')
+	angular.module('HomeCtrl', [])
 		.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
 			// fetch all rooms for this user
@@ -29,4 +29,4 @@
 
 		}]);
 
-})(jquery, angular)
+})(jQuery, angular)
