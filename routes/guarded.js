@@ -28,7 +28,8 @@ module.exports = router => {
 				const room = new Room({
 					name: roomData.name,
 					users: userIds,
-					notifications: notificationIds
+					notifications: notificationIds,
+					online: roomData.online
 				});
 
 				return room.save();
@@ -36,28 +37,6 @@ module.exports = router => {
 			.then(() => res.json({success: true, message: 'You just got filled!'}))
 			.catch(() => res.json({success: false, message: 'Looks as if it didn\'t go smooth.'}));
     });
-
-	// logout
-	router.get('/logout', (req, res) => {
-
-		const {username} = req.decoded._doc.username;
-		const update = {$set: {isOnline: false}};
-		const options = {new: true};
-
-		User.findOneAndUpdate({username}, update, options)
-			.then(() => {
-		
-				req.session.destroy(err => {
-	
-					if(err) {
-						res.json({success: true, message: 'Logged out successfully!'});
-					} else {
-						res.redirect('/');
-					}
-				});		
-			})
-			.catch(() => res.json({success: false, message: 'Error in logging'}));
-	});
 
 	// joins a room
 	router.put('/join/:roomId', (req, res) => {

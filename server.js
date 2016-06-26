@@ -40,7 +40,7 @@ require('./routes/guarded')(router);
 
 // catch-all
 app.get('*', (req, res) => {
-    res.sendfile('./public/index.html');
+    res.sendFile(`${__dirname}/public/index.html`);
 });
 
 // listening to port

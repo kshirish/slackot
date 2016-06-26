@@ -15,7 +15,8 @@ const roomSchema = new mongoose.Schema({
 	notifications: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Notification'
-	}]
+	}],
+	online: [String]
 });
 
 module.exports = mongoose.model('Room', roomSchema);

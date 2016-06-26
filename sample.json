@@ -94,6 +94,7 @@
     "roomData": {
         "name": "Avengers",
         "users": [],
-        "notifications": []
+        "notifications": [],
+        "online": []
     }
 }

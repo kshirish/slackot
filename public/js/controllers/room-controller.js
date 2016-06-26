@@ -12,10 +12,35 @@
 
 			var socket = io.connect('http://localhost:9999');
 
-			socket.emit('little_newbie', $window.sessionStorage.getItem('username'));
+			socket.emit('joined a room', {
+				username: $window.sessionStorage.getItem('username'),
+				roomId: $routeParams.roomId
+			});
 
-		    socket.on('notification_from_server', function(message) {
+		    socket.on('personal message from server', function(message) {
 		        console.log('Server: ' + message);
+		    });
+
+		    socket.on('broadcast message from server', function(data) {
+		        
+		        switch(data.type) {
+
+		        	case 'online': 	$scope.users.forEach(function(user) {		        	
+							        	user.isOnline = data.clients.indexOf(user.username) !== -1;
+							        });
+
+		        					break;
+
+		        	case 'room'  :	$scope.notifications = $scope.notifications.concat({
+					   					created: (new Date()).toISOString(),
+					   					username: data.username,
+					   					content: data.content	
+					   				});			
+
+		        					break;
+		        }
+
+		        $scope.$apply();
 		    });
 
 			// room
@@ -72,9 +97,16 @@
 					}					
 				});
 
+			$window.onbeforeunload = function (e) {
+
+				// socket.emit('left a room', {
+				// 	roomId: $routeParams.roomId
+				// });
+			};
+
    			$scope.sendNotification = function(content) {
 
-   				socket.emit('notification', {
+   				socket.emit('message from client', {
    					content: content,
    					roomId: $scope.roomId,
    					username: $window.sessionStorage.getItem('username')
