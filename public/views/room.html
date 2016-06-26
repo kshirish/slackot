@@ -1,10 +1,11 @@
 <div id="room">
     <div class="page-header">
-        <h2>{{roomId}}</h2>
+        <h2>{{roomname | uppercase }}</h2>
     </div>
+    <div ng-show="message" class="alert" ng-class="{'alert-danger': isError, 'alert-success': !isError}" role="alert">{{message}}</div>
     <div class="row">
         <div class="col-sm-12" ng-repeat="user in users">
-            <button type="button" class="btn btn-default" disabled="disabled">{{user}}</button>
+            <button type="button" class="btn btn-default" disabled="disabled">{{user.username}}</button>
         </div>
     </div>
     <hr>
@@ -20,7 +21,7 @@
     <div class="row">
         <div class="col-sm-12">
             <textarea class="form-control" rows="4" placeholder="Type message here .." ng-model="content"></textarea>
-            <button type="button" class="btn btn-default" ng-click="sendNotification(content)">Send</button>
+            <button type="button" class="btn btn-primary margin-top-25" ng-click="sendNotification(content)">Send</button>
         </div>
     </div>
 </div>

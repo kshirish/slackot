@@ -1,23 +1,34 @@
-module.exports = router => {
+module.exports = (router, jwt, secret) => {
 
 	// Allow CORS
 	router.use((req, res, next) => {
 
+  		const token = req.headers['x-access-token'];
+
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
 		res.header('Access-Control-Allow-Headers', 'Content-type, Accept, X-Access-Token, X-Key');
-		
-		console.log(`Requested url : ${req.url}`);
-		console.log(`Request came from : ${req.session.username}`);
 
-		if(req.session.username) {
-			next();
+		if (token) {
+
+			// verifies secret and checks exp
+			jwt.verify(token, secret, function(err, decoded) {      
+
+				if (err) {
+
+					return res.json({ success: false, message: 'Failed to authenticate token.' });    
+
+				} else {
+
+					req.decoded = decoded;    
+					next();
+				}
+			});
+
 		} else {
-			if(req.url === '/signup' || req.url === '/login') {
-				next();
-			} else {
-				res.status(200).end();	
-			}
+
+			return res.status(403).send({success: false, message: 'No token provided.'})
 		}
+
 	});
 };

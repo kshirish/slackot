@@ -1,4 +1,5 @@
 <div id="home">
+    <div ng-show="message" class="alert" ng-class="{'alert-danger': isError, 'alert-success': !isError}" role="alert">{{message}}</div>
     <div class="row">
         <div class="col-sm-12 margin-top-25">
             <form class="form-inline" ng-submit="createRoom(roomname)">

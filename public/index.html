@@ -7,28 +7,29 @@
         <link rel="stylesheet" type="text/css" href="angular-csp.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-<!--         <script type="text/javascript">
-            if(!sessionStorage.getItem('loggedIn') && window.location.href.indexOf('login') === -1) {
-                window.location.href = '/login';
-            } else if(sessionStorage.getItem('loggedIn') && window.location.href.indexOf('login') !== -1) {
+        
+        <script type="text/javascript">
+
+            // For people without a token, there is only one place - login!
+            if(!sessionStorage.getItem('token') && window.location.pathname !== '/') {
+                window.location.href = '/';
+            } else if(sessionStorage.getItem('token') && window.location.pathname === '/') {
                 window.location.href = '/home';
             }
-        </script> -->
+        
+        </script>
+    
     </head>
     <body ng-app="slackot">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="jumbotron">
-                    <h1>Slackot!</h1>
+                    <h1><a href="/home">Slackot!</a></h1>
                     <p>Slackot brings all your communication together in one place. It's real-time messaging app.</p>
                 </div>
-                <ul class="nav nav-pills" ng-hide="loginPage">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>                    
-                </ul>
-                <hr>
 
                 <div ng-view></div>
+
             </div>
         </div>
         <script type="text/javascript" src="jquery.min.js"></script>

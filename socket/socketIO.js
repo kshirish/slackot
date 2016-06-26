@@ -4,10 +4,39 @@ const Room = require('../models/room');
 
 module.exports = io => {
 
-	io.on('connection', socket => {
+	io.sockets.on('connection', socket => {
+
+		// console.log(socket);
 
 	    // emit the rooms array
-	    // socket.emit('setup', {rooms});
+	    socket.emit('notification_from_server', 'You\'re connected!');
+
+	    // listen on `little_newbie`
+	    socket.on('little_newbie', username => {
+	    	
+	    	socket.username = username;
+	    	socket.emit('notification_from_server', `Welcome aboard! ${username}`);
+	    	socket.broadcast.emit('notification_from_server', '${username} has just joined!');
+	    });
+
+	    // listens for a new notification
+	    socket.on('notification', data => {
+	        
+			const _id = data.roomId;
+			const {content, username} = data;
+
+			console.log(data);
+
+			Room.findById({_id})
+				.then(room => {
+
+					const notification = new Notification({content, username});
+					return notification.save();
+				})
+				.then((notification) => Room.update({_id}, {$push: {notifications: notification._id}}))
+				.then(() => console.log('Notification sent successfully'))
+				.catch(() => console.log('Error in getting notifications for this room'));
+	    });
 
 	    // listens for a new user
 	    // socket.on('app_join', data => {
@@ -33,21 +62,5 @@ module.exports = io => {
 	  //       io.in(data.currentRoom).emit('room_join', data);
 	  //   });
 
-	    // listens for a new notification
-	    socket.on('notification', data => {
-	        
-			const _id = data.roomId;
-			const {content, username} = data;
-
-			Room.findById({_id})
-				.then(room => {
-
-					const notification = new Notification({content, username});
-					return notification.save();
-				})
-				.then((notification) => return Room.update({_id}, {$push: {notifications: notification._id}}))
-				.then(() => console.log('Notification sent successfully'))
-				.catch(() => console.log('Error in getting notifications for this room'));
-	    });
 	});
 }

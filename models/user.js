@@ -8,11 +8,7 @@ const userSchema = new mongoose.Schema({
 		default: Date.now 
 	},
 	username: String,
-	password: String,
-	isOnline: {
-		type: Boolean,
-		default: false
-	}
+	password: String
 });
 
 module.exports = mongoose.model('User', userSchema);

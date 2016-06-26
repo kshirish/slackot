@@ -1,9 +1,13 @@
 (function($, angular) {
 
 	angular.module('LoginCtrl', [])
-		.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', '$sessionStorage', function($scope, $rootScope, $http, $location, $sessionStorage) {
+		.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', '$window', function($scope, $rootScope, $http, $location, $window) {
 
-			$rootScope.loginPage = true;
+			var config = {
+				headers: {
+					'x-access-token': $window.sessionStorage.getItem('token')
+				}
+			};
 
 			$scope.login = function(username, password) {
 
@@ -15,18 +19,23 @@
 				if(!info.username || !info.password) {return;}
 
 				// authenticate the user
-				$http.post('/api/v1/login', info)
+				$http.post('/api/v1/login', info, config)
 					.success(function(data) {
 						
 						if(data.success) {
 
-							$sessionStorage.username = info.username;
+							$scope.isError = false;
+							$scope.message = null;
+							$window.sessionStorage.setItem('token', data.token);
+							$window.sessionStorage.setItem('username', info.username);
 							$location.url('/home');
+
+						} else {
+
+							$scope.isError = true;
+							$scope.message = data.message;
 						}
-					})
-					.error(function() {					
-						// handle error
-					});				
+					});
 			};
 
 
@@ -40,12 +49,19 @@
 				if(!info.username || !info.password) {return;}
 
 				// authenticate the user
-				$http.post('/api/v1/signup', info)
+				$http.post('/api/v1/signup', info, config)
 					.success(function(data) {
-						// handle data
-					})
-					.error(function() {					
-						// handle error
+						
+						if(data.success) {
+
+							$scope.isError = false;
+							$scope.message = data.message;
+
+						} else {
+
+							$scope.isError = true;
+							$scope.message = data.message;
+						}
 					});
 			};
 

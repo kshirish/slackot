@@ -1,3 +1,4 @@
 {
-	"databaseUrl": "mongodb://localhost/slackot"
+	"databaseUrl": "mongodb://localhost/slackot",
+	"secret": "ssssssssshhhhhh"
 }
