@@ -1,7 +1,7 @@
 <div id="home">
     <div ng-show="message" class="alert" ng-class="{'alert-danger': isError, 'alert-success': !isError}" role="alert">{{message}}</div>
-    <div class="row">
-        <div class="col-sm-12 margin-top-25">
+    <div class="row margin-top-25">
+        <div class="col-sm-8">
             <form class="form-inline" ng-submit="createRoom(roomname)">
                 <div class="form-group">
                     <label class="sr-only" for="createRoom">Room name</label>
@@ -12,13 +12,16 @@
                 <button type="submit" class="btn btn-primary">Create room</button>
             </form>
         </div>
+        <div class="col-sm-4">            
+            <button type="button" ng-show="!otherRooms.length && !joinedRooms.length" class="btn btn-success" ng-click="setup()">Setup</button>
+        </div>
     </div>
     <div class="page-header">
         <h2>Rooms joined</h2>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="btn-group" ng-repeat="room in joinedRooms">
+            <div class="btn-group space-out" ng-repeat="room in joinedRooms">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{room.name}} <span class="caret"></span>
                 </button>
@@ -35,7 +38,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="btn-group" ng-repeat="room in otherRooms">
+            <div class="btn-group space-out" ng-repeat="room in otherRooms">
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{room.name}} <span class="caret"></span>
                 </button>

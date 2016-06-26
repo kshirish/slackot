@@ -1,21 +1,99 @@
 {
-    "defaultRoom": "general",
-    "rooms": ["General", "angular", "socket.io", "express", "node", "mongo", "PHP", "laravel"],
-    "sampleNotifications": [{
-        "content": "Hi",
-        "username": "Chris",
-        "room": "php"
+    "userData": [{
+        "username": "ultron",
+        "password": "ultron"
     }, {
-        "content": "Hello",
-        "username": "Obinna",
-        "room": "laravel"
+        "username": "iron_man",
+        "password": "iron_man"
     }, {
-        "content": "Ait",
-        "username": "Bill",
-        "room": "angular"
+        "username": "black_widow",
+        "password": "black_widow"
     }, {
-        "content": "Amazing room",
-        "username": "Patience",
-        "room": "socket.io"
-    }]
+        "username": "hulk",
+        "password": "hulk"
+    }, {
+        "username": "captain_america",
+        "password": "captain_america"
+    }, {
+        "username": "thor",
+        "password": "thor"
+    }, {
+        "username": "loki",
+        "password": "loki"
+    }, {
+        "username": "quicksilver",
+        "password": "quicksilver"
+    }, {
+        "username": "war_machine",
+        "password": "war_machine"
+    }, {
+        "username": "vision",
+        "password": "vision"
+    }, {
+        "username": "thanos",
+        "password": "thanos"
+    }, {
+        "username": "spider_man",
+        "password": "spider_man"
+    }],
+    "notificationData": [{
+        "content": "Enough! You are, all of you are beneath me! I am a god, you dull creature, and I will not be bullied",
+        "username": "iron_man"
+    }, {
+        "content": "He has an army, called the Chitauri. They're not of Asgard or any world known. He means to lead them against your people. They will win him the Earth. In return, I suspect, for the Tesseract.",
+        "username": "black_widow"
+    }, {
+        "content": "Loki has them under some kind of spell. Along with one of ours.",
+        "username": "loki"
+    }, {
+        "content": "The Avengers. That's what we call ourselves; we're sort of like a team. \"Earth's Mightiest Heroes\" type thing",
+        "username": "black_widow"
+    }, {
+        "content": "Kneel before me. I said, KNEEL!",
+        "username": "black_widow"
+    }, {
+        "content": "A hero? Like you? You're a lab rat, Rogers. Everything special about you came out of a bottle!",
+        "username": "loki"
+    }, {
+        "content": "I think I would just cut the wire.",
+        "username": "loki"
+    }, {
+        "content": "Genius, billionaire, playboy, philanthropist",
+        "username": "iron_man"
+    }, {
+        "content": "Look to your elder, people. Let him be an example.",
+        "username": "black_widow"
+    }, {
+        "content": "Big man in a suit of armour. Take that off, what are you?",
+        "username": "iron_man"
+    }, {
+        "content": "You and me, we stay here on the ground, keep the fighting here. And Hulk?",
+        "username": "loki"
+    }, {
+        "content": "He killed eighty people in two days.",
+        "username": "black_widow"
+    }, {
+        "content": "We have a Hulk!",
+        "username": "iron_man"
+    }, {
+        "content": "I thought the beast had wandered off ...",
+        "username": "loki"
+    }, {
+        "content": "I'm not overly fond of what follows ...",
+        "username": "iron_man"
+    }, {
+        "content": "What?",
+        "username": "loki"
+    }, {
+        "content": "From outer space, an alien.",
+        "username": "iron_man"
+    }, {
+        "content": "Well then son, you've got a condition.",
+        "username": "loki"
+    }],
+    "roomData": {
+        "name": "Avengers",
+        "users": [],
+        "notifications": []
+    }
 }

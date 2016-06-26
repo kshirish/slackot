@@ -47,6 +47,23 @@
 					});
 			};
 
+			$scope.setup = function(name) {
+
+				$http.post('/api/v1/setup', {}, config)
+					.success(function(data) {
+						
+						if(data.success) {
+						
+							$window.location.reload();
+
+						} else {
+
+							$scope.isError = true;
+							$scope.message = data.message;
+						}						
+					});
+			};
+
 			$scope.joinRoom = function(room) {
 
 				$http.put('/api/v1/join/' + room._id, {}, config)

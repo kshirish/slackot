@@ -5,19 +5,6 @@ const {sampleNotifications} = require('../sample') ;
 
 module.exports = (router, jwt, secret) => {
 
-	// generates sample notifications to get started
-    router.post('/init', (req, res) => {
-
-		const notifications = sampleNotifications.map(function(notification) {
-			return new Notification(notification);
-		});	
-
-		Notification.insertMany(notifications)
-			.then(() => res.json({success: 'Sample notifications created successfully!'}))
-			.catch(() => res.json({error: 'Error in creating sample notifications'}));
-
-    });
-
 	// login
 	router.post('/login', (req, res) => {
 
@@ -44,10 +31,6 @@ module.exports = (router, jwt, secret) => {
 						const token = jwt.sign(user, secret, {
 							expiresIn: '24h'
 						});
-
-						// set user information in session
-						req.session.username = user.username;
-						req.session.userId = user._id;
 
 						// return the information including token as JSON
 						res.json({success: true, token: token});

@@ -4,8 +4,8 @@
     </div>
     <div ng-show="message" class="alert" ng-class="{'alert-danger': isError, 'alert-success': !isError}" role="alert">{{message}}</div>
     <div class="row">
-        <div class="col-sm-12" ng-repeat="user in users">
-            <button type="button" class="btn btn-default" disabled="disabled">{{user.username}}</button>
+        <div class="col-sm-12">
+            <button type="button" ng-repeat="user in users" class="btn btn-default space-out" disabled="disabled">{{user.username}}</button>
         </div>
     </div>
     <hr>

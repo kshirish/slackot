@@ -1,9 +1,41 @@
 const Notification = require('../models/notification');
 const User = require('../models/user');
 const Room = require('../models/room');
-const {sampleNotifications} = require('../sample') ;
+const {roomData, userData, notificationData} = require('../sample');
 
 module.exports = router => {
+
+	// generates sample notifications to get started
+    router.post('/setup', (req, res) => {
+
+		const users = userData.map(function(user) {
+			return new User(user);
+		});	
+
+		const notifications = notificationData.map(function(notification) {
+			return new Notification(notification);
+		});	
+
+		const userPromise = User.insertMany(users);
+		const notificationPromise = Notification.insertMany(notifications);
+
+		Promise.all([userPromise, notificationPromise])
+			.then(([users, notifications]) => {
+
+				const userIds = users.map(user => user._id);
+				const notificationIds = notifications.map(notification => notification._id);
+
+				const room = new Room({
+					name: roomData.name,
+					users: userIds,
+					notifications: notificationIds
+				});
+
+				return room.save();
+			})
+			.then(() => res.json({success: true, message: 'You just got filled!'}))
+			.catch(() => res.json({success: false, message: 'Looks as if it didn\'t go smooth.'}));
+    });
 
 	// logout
 	router.get('/logout', (req, res) => {
